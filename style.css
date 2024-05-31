@@ -57,10 +57,12 @@ main{
     padding: 15px 25px;
     text-align: center;
 }
-
+.submit{
+    text-align: center;
+}
 .submit button{
     cursor: pointer;
-    margin-top: 20px;
+    margin: 20px 0px;
     padding: 15px 25px;
     text-align: center;
 }
