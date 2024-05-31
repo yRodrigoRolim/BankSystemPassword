@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Senha de banco</title>
+</head>
+
+<body>
+    <main>
+        <div class="content">
+            <div>
+                <h2>Digite a senha da sua conta</h2>
+            </div>
+            <div class="output">
+                <span>
+                    <p id="output-1"></p>
+                </span>
+                <span>
+                    <p id="output-2"></p>
+                </span>
+                <span>
+                    <p id="output-3"></p>
+                </span>
+                <span>
+                    <p id="output-4"></p>
+                </span>
+                <span>
+                    <p id="output-5"></p>
+                </span>
+                <span>
+                    <p id="output-6"></p>
+                </span>
+            </div>
+            <div class="input">
+                <button id="button-1" value="1" onclick="BtnPress(this.value)">1 ou 2</button>
+                <button id="button-2" value="2" onclick="BtnPress(this.value)">3 ou 4</button>
+                <button id="button-3" value="3" onclick="BtnPress(this.value)">5 ou 6</button>
+                <button id="button-4" value="4" onclick="BtnPress(this.value)">7 ou 8</button>
+                <button id="button-5" value="5" onclick="BtnPress(this.value)">9 ou 0</button>
+                <button id="button-delete" value="6" onclick="BtnPress(this.value)">Delete</button>
+            </div>
+            <div class="submit">
+                <button id="Submit" onclick="submit()">Submit</button>
+            </div>
+        </div>
+
+        <script>
+            let senha = ["3", "3", "5", "6", "7", "8"];
+            let senhaInserida = [];
+            let NumberClick = 0;
+
+            let output1 = document.getElementById("output-1");
+            let output2 = document.getElementById("output-2");
+            let output3 = document.getElementById("output-3");
+            let output4 = document.getElementById("output-4");
+            let output5 = document.getElementById("output-5");
+            let output6 = document.getElementById("output-6");
+
+            let button1 = document.getElementById("button-1");
+            let button2 = document.getElementById("button-2");
+            let button3 = document.getElementById("button-3");
+            let button4 = document.getElementById("button-4");
+            let button5 = document.getElementById("button-5");
+            let buttondelete = document.getElementById("button-delete");
+            
+            let arrayNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+            let NewArray1 = [];
+            let NewArray2 = [];
+            let NewArray3 = [];
+            let NewArray4 = [];
+            let NewArray5 = [];
+
+            CriarArray()
+            function CriarArray() {
+                randomNumber()
+                function randomNumber() {
+                    let index = Math.floor(Math.random() * arrayNumber.length);
+                    let value = arrayNumber[index];
+
+                    if (arrayNumber.length >= 9) {
+                        arrayNumber.splice(index, 1);
+                        igual2(NewArray1, value);
+                        randomNumber();
+                    }
+                    else if (arrayNumber.length >= 7) {
+                        arrayNumber.splice(index, 1);
+                        igual2(NewArray2, value);
+                        randomNumber();
+                    }
+                    else if (arrayNumber.length >= 5) {
+                        arrayNumber.splice(index, 1);
+                        igual2(NewArray3, value);
+                        randomNumber();
+                    }
+                    else if (arrayNumber.length >= 3) {
+                        arrayNumber.splice(index, 1);
+                        igual2(NewArray4, value);
+                        randomNumber()
+                    } else if (arrayNumber.length >= 1) {
+                        arrayNumber.splice(index, 1);
+                        igual2(NewArray5, value);
+                        if (NewArray5.length != 2) {
+                            randomNumber();
+                        } else {
+                            WriteInButton();
+                        }
+                    }
+                }
+                function igual2(array, value) {
+                    if (array.length != 2) {
+                        NewArray(array, value)
+                    }
+                }
+                function NewArray(array, value) {
+                    array.push(value)
+                }
+
+                function WriteInButton() {
+                    button1.innerHTML = NewArray1[0] + " ou " + NewArray1[1];
+                    button2.innerHTML = NewArray2[0] + " ou " + NewArray2[1];
+                    button3.innerHTML = NewArray3[0] + " ou " + NewArray3[1];
+                    button4.innerHTML = NewArray4[0] + " ou " + NewArray4[1];
+                    button5.innerHTML = NewArray5[0] + " ou " + NewArray5[1];
+                }
+            }
+            function BtnPress(valor) {
+                if (valor == 1) {
+                    ArraySenha(NewArray1);
+                }
+                if (valor == 2) {
+                    ArraySenha(NewArray2);
+                }
+                if (valor == 3) {
+                    ArraySenha(NewArray3);
+                }
+                if (valor == 4) {
+                    ArraySenha(NewArray4);
+                }
+                if (valor == 5) {
+                    ArraySenha(NewArray5);
+                }
+                if (valor == 6) {
+                    if (NumberClick > 0) {
+                        OutputValueRemove(NumberClick);
+                    }
+                }
+            }
+            function ArraySenha(array) {
+                if (NumberClick < 7) {
+                    NumberClick = NumberClick + 1;
+                    OutputValueInsert(NumberClick);
+                }
+                arrayNumber = NumberClick - 1;
+
+
+                if (senha[arrayNumber] == array[0] || senha[arrayNumber] == array[1] ) {
+                    senhaInserida[arrayNumber] = 1;
+                } else{
+                    senhaInserida[arrayNumber] = 0;
+                }
+
+            }
+            function OutputValueInsert(valor) {
+                if (valor == 1) {
+                   output1.innerHTML = "*"
+                }
+                if (valor == 2) {
+                   output2.innerHTML = "*"
+                }
+                if (valor == 3) {
+                   output3.innerHTML = "*"
+                }
+                if (valor == 4) {
+                   output4.innerHTML = "*"
+                }
+                if (valor == 5) {
+                    output5.innerHTML = "*"
+                }
+                if (valor == 6) {
+                    output6.innerHTML = "*"
+                }
+            }
+            function OutputValueRemove(valor) {
+                NumberClick = NumberClick - 1;
+                if (valor == 1) {
+                   output1.innerHTML = ""
+                }
+                if (valor == 2) {
+                   output2.innerHTML = ""
+                }
+                if (valor == 3) {
+                   output3.innerHTML = ""
+                }
+                if (valor == 4) {
+                   output4.innerHTML = ""
+                }
+                if (valor == 5) {
+                    output5.innerHTML = ""
+                }
+                if (valor == 6) {
+                    output6.innerHTML = ""
+                }
+            }
+            function submit() {
+                lastOutput =  output6.innerHTML;
+                valor = 0;
+                if(lastOutput == "*"){
+                Validate(valor)
+            }
+                function Validate(valor){
+
+                        if (senhaInserida[valor] == 1) {
+                            valor++
+                            if (valor < 6) {
+                                Validate(valor)
+                            }else{
+                                console.log("senha correta");
+                            }
+
+                        } else{
+                            console.log("senha errada");
+                        }
+                    }
+            }
+
+        </script>
+    </main>
+</body>
+
+</html>
