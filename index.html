@@ -44,6 +44,9 @@
             </div>
             <div class="submit">
                 <button id="Submit" onclick="submit()">Submit</button>
+                <p id="result">
+                    Digite a sua senha
+                </p>
             </div>
         </div>
 
@@ -66,6 +69,7 @@
             let button5 = document.getElementById("button-5");
             let buttondelete = document.getElementById("button-delete");
             
+            let result = document.getElementById("result");
             let arrayNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
             let NewArray1 = [];
             let NewArray2 = [];
@@ -217,11 +221,12 @@
                             if (valor < 6) {
                                 Validate(valor)
                             }else{
-                                console.log("senha correta");
+                                result.innerHTML = "Senha Correta" 
                             }
 
                         } else{
-                            console.log("senha errada");
+                            result.innerHTML = "Senha incorreta" 
+                            window.location.reload();
                         }
                     }
             }
